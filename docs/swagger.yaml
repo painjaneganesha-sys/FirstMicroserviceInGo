@@ -1,0 +1,50 @@
+basePath: /
+definitions:
+  api.Request:
+    properties:
+      a: {}
+      b: {}
+      operation:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: Simple Calculator Microservice
+  title: First Microservice
+  version: "1.0"
+paths:
+  /calculate:
+    post:
+      consumes:
+      - application/json
+      description: Perform a mathematical operation
+      parameters:
+      - description: Calculator request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/api.Request'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              format: float64
+              type: number
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "405":
+          description: Method Not Allowed
+          schema:
+            type: string
+      summary: Calculate
+      tags:
+      - calculator
+swagger: "2.0"
